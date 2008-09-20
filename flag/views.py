@@ -17,7 +17,7 @@ def flag(request):
     content_type = get_object_or_404(ContentType, id = int(content_type))
     object_id = int(object_id)
     
-    content_object = content_type.get_object_for_this_type(idobject_id)
+    content_object = content_type.get_object_for_this_type(object_id)
     
     if creator_field and hasattr(content_object, creator_field):
         creator = getattr(content_object, creator_field)
