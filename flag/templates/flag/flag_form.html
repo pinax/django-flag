@@ -1,7 +1,7 @@
 {% load flagtags %}
 
 {% block content %}
-    <form method="POST" action="">
+    <form method="POST" action="{% url flag %}">
         <table>
             <tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
             <tr>
