@@ -33,3 +33,19 @@ class FlagInstance(models.Model):
     user = models.ForeignKey(User)
     when_added = models.DateTimeField(default=datetime.now)
     when_recalled = models.DateTimeField(null=True) # if recalled at all
+
+
+def add_flag(flagger, content_object, content_creator):
+    
+    # check if it's already been flagged
+    try:
+        flagged_content = FlaggedContent.objects.get(content_object=content_object)
+    except FlaggedContent.DoesNotExist:
+        creator = content_creator
+        flagged_content = FlaggedContent(content_object=content_object, creator=creator)
+        flagged_content.save()
+    
+    flag_instance = FlagInstance(flagged_content=flagged_content, user=flagger)
+    flag_instance.save()
+    
+    return flag_instance
