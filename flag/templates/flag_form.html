@@ -1,0 +1,12 @@
+{% extends "flag_base.html" %}
+
+{% load flagtags %}
+
+{% block content %}
+    <form method="POST" action="">
+        <ul>
+            {{ form.as_ul }}
+            <li><input type="submit" value="Submit Flag" /></li>
+        </ul>
+    </form>
+{% endblock %}
