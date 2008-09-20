@@ -30,12 +30,12 @@ class FlaggedContent(models.Model):
 class FlagInstance(models.Model):
     
     flagged_content = models.ForeignKey(FlaggedContent)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User) # user flagging the content
     when_added = models.DateTimeField(default=datetime.now)
     when_recalled = models.DateTimeField(null=True) # if recalled at all
+    comment = models.TextField() # comment by the flagger
 
-
-def add_flag(flagger, content_object, content_creator):
+def add_flag(flagger, content_object, content_creator, comment):
     
     # check if it's already been flagged
     try:
@@ -45,7 +45,7 @@ def add_flag(flagger, content_object, content_creator):
         flagged_content = FlaggedContent(content_object=content_object, creator=creator)
         flagged_content.save()
     
-    flag_instance = FlagInstance(flagged_content=flagged_content, user=flagger)
+    flag_instance = FlagInstance(flagged_content=flagged_content, user=flagger, comment=comment)
     flag_instance.save()
     
     return flag_instance
