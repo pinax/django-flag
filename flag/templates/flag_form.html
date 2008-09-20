@@ -4,9 +4,13 @@
 
 {% block content %}
     <form method="POST" action="">
-        <ul>
-            {{ form.as_ul }}
-            <li><input type="submit" value="Submit Flag" /></li>
-        </ul>
+        <table>
+            <tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></td></tr>
+            <tr>
+                <td><input type="hidden" name="object_id" value="{{ object_id }}" />
+                    <input type="hidden" name="next" value="{{ request.path }}" />
+                    <input type="submit" value="Submit Flag" /></td>
+            </tr>
+        </table>
     </form>
 {% endblock %}
