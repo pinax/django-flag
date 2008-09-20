@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 
 from flag.models import add_flag
