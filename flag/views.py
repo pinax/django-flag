@@ -7,8 +7,6 @@ from flag.models import add_flag
 @login_required
 def flag(request):
     
-    form = form_class(request.POST)
-    
     content_type = request.POST.get("content_type")
     object_id = request.POST.get("object_id")
     creator_field = request.POST.get("creator_field")
