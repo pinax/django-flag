@@ -35,14 +35,14 @@ class FlagInstance(models.Model):
     when_recalled = models.DateTimeField(null=True) # if recalled at all
     comment = models.TextField() # comment by the flagger
 
-def add_flag(flagger, content_object, content_creator, comment):
+
+def add_flag(flagger, content_type, object_id, content_creator, comment):
     
     # check if it's already been flagged
     try:
-        flagged_content = FlaggedContent.objects.get(content_object=content_object)
+        flagged_content = FlaggedContent.objects.get(content_type=content_type, object_id=object_id)
     except FlaggedContent.DoesNotExist:
-        creator = content_creator
-        flagged_content = FlaggedContent(content_object=content_object, creator=creator)
+        flagged_content = FlaggedContent(content_type=content_type, object_id=object_id, creator=content_creator)
         flagged_content.save()
     
     flag_instance = FlagInstance(flagged_content=flagged_content, user=flagger, comment=comment)
