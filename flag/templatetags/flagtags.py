@@ -15,4 +15,4 @@ def flag(context, content_object, creator_field):
     }
 
 
-register.inclusion_tag('templates/flag_form.html', takes_context=True)(flag)
+register.inclusion_tag('flag/flag_form.html', takes_context=True)(flag)
