@@ -1,5 +1,5 @@
-django-flags
-============
+django-flag
+===========
 
 This app lets users of your site flag content as inappropriate or spam.
 
