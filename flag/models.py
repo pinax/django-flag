@@ -38,14 +38,20 @@ class FlagInstance(models.Model):
 
 def add_flag(flagger, content_type, object_id, content_creator, comment):
     
-    # check if it"s already been flagged
-    try:
-        flagged_content = FlaggedContent.objects.get(content_type=content_type, object_id=object_id)
-    except FlaggedContent.DoesNotExist:
-        flagged_content = FlaggedContent(content_type=content_type, object_id=object_id, creator=content_creator)
-        flagged_content.save()
+    # check if it's already been flagged
+    flagged_content, created = FlaggedContent.objects.get_or_create(
+        content_type = content_type,
+        object_id = object_id,
+        defaults = dict(
+            creator = content_creator
+        )
+    )
     
-    flag_instance = FlagInstance(flagged_content=flagged_content, user=flagger, comment=comment)
+    flag_instance = FlagInstance(
+        flagged_content = flagged_content,
+        user = flagger,
+        comment = comment
+    )
     flag_instance.save()
     
     return flag_instance
