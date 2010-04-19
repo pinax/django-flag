@@ -6,3 +6,4 @@ django-flag CHANGELOG
 ===
 
  * BI: renamed {% load flagtags %} to {% load flag_tags %}
+ * requires Django 1.1.2+
