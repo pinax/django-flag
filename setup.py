@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "django-flag",
-    version = "0.1.0",
+    version = "0.2.dev1",
     description = "flagging of inapproriate/spam content",
     author = "Greg Newman",
     author_email = "greg@20seven.org",
