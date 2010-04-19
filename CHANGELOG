@@ -1,0 +1,8 @@
+=====================
+django-flag CHANGELOG
+=====================
+
+0.2
+===
+
+ * BI: renamed {% load flagtags %} to {% load flag_tags %}
