@@ -5,14 +5,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.utils.translation import ugettext_lazy as _
 
 
 STATUS = (
-    ("1", "flagged"),
-    ("2", "flag rejected by moderator"),
-    ("3", "creator notified"),
-    ("4", "content removed by creator"),
-    ("5", "content removed by moderator"),
+    ("1", _("flagged")),
+    ("2", _("flag rejected by moderator")),
+    ("3", _("creator notified")),
+    ("4", _("content removed by creator")),
+    ("5", _("content removed by moderator")),
 )
 
 
