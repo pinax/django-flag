@@ -1,2 +1,2 @@
-recursive-include docs/ *.txt
+recursive-include docs *.txt
 recursive-include flag/templates *.html
