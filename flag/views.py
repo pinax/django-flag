@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 
 from flag.models import add_flag
 
@@ -28,7 +28,10 @@ def flag(request):
         creator = None
     
     add_flag(request.user, content_type, object_id, creator, comment)
-    request.user.message_set.create(message=_("You have added a flag. A moderator will review your submission shortly."))
+    request.user.message_set.create(
+        message = _("You have added a flag. A moderator will review your "
+            "submission shortly.")
+    )
     
     if next:
         return HttpResponseRedirect(next)
