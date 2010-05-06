@@ -3,4 +3,9 @@ django-flag
 
 This app lets users of your site flag content as inappropriate or spam.
 
+By default some choices for status are available, however if you'd like to
+customize them you can provide a ``FLAG_STATUSES`` setting which is a list of
+two tuples where the first item is the value (a one character string) and the
+second is the readable value.  The default choice should have a key of ``"1"``.
+
 (more here soon)

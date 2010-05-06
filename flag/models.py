@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.conf import settings
 from django.db import models
 
 from django.contrib.auth.models import User
@@ -8,13 +9,13 @@ from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext_lazy as _
 
 
-STATUS = (
+STATUS = getattr(settings, "FLAG_STATUSES", [
     ("1", _("flagged")),
     ("2", _("flag rejected by moderator")),
     ("3", _("creator notified")),
     ("4", _("content removed by creator")),
     ("5", _("content removed by moderator")),
-)
+])
 
 
 class FlaggedContent(models.Model):
