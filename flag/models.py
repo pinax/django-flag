@@ -8,6 +8,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext_lazy as _
 
+from flag import signals
+
 
 STATUS = getattr(settings, "FLAG_STATUSES", [
     ("1", _("flagged")),
@@ -55,5 +57,11 @@ def add_flag(flagger, content_type, object_id, content_creator, comment):
         comment = comment
     )
     flag_instance.save()
+    
+    signals.content_flagged.send(
+        sender = FlaggedContent,
+        flagged_content = flagged_content,
+        flagged_instance = flagged_instance,
+    )
     
     return flag_instance
