@@ -61,7 +61,7 @@ def add_flag(flagger, content_type, object_id, content_creator, comment):
     signals.content_flagged.send(
         sender = FlaggedContent,
         flagged_content = flagged_content,
-        flagged_instance = flagged_instance,
+        flagged_instance = flag_instance,
     )
     
     return flag_instance
