@@ -58,10 +58,11 @@ def add_flag(flagger, content_type, object_id, content_creator, comment):
     )
     flag_instance.save()
     
-    signals.content_flagged.send(
-        sender = FlaggedContent,
-        flagged_content = flagged_content,
-        flagged_instance = flag_instance,
-    )
+    if created:
+        signals.content_flagged.send(
+            sender = FlaggedContent,
+            flagged_content = flagged_content,
+            flagged_instance = flag_instance,
+        )
     
     return flag_instance
