@@ -29,6 +29,9 @@ class FlaggedContent(models.Model):
     creator = models.ForeignKey(User, related_name="flagged_content") # user who created flagged content -- this is kept in model so it outlives content
     status = models.CharField(max_length=1, choices=STATUS, default="1")
     moderator = models.ForeignKey(User, null=True, related_name="moderated_content") # moderator responsible for last status change
+    
+    class Meta:
+        unique_together = [("content_type", "object_id")]
 
 
 class FlagInstance(models.Model):
