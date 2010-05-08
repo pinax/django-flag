@@ -43,15 +43,16 @@ class FlagInstance(models.Model):
     comment = models.TextField() # comment by the flagger
 
 
-def add_flag(flagger, content_type, object_id, content_creator, comment):
+def add_flag(flagger, content_type, object_id, content_creator, comment, status=None):
     
     # check if it's already been flagged
+    defaults = dict(creator=content_creator)
+    if status is not None:
+        defaults["status"] = status
     flagged_content, created = FlaggedContent.objects.get_or_create(
         content_type = content_type,
         object_id = object_id,
-        defaults = dict(
-            creator = content_creator
-        )
+        defaults = default
     )
     
     flag_instance = FlagInstance(
