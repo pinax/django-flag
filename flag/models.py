@@ -52,7 +52,7 @@ def add_flag(flagger, content_type, object_id, content_creator, comment, status=
     flagged_content, created = FlaggedContent.objects.get_or_create(
         content_type = content_type,
         object_id = object_id,
-        defaults = default
+        defaults = defaults
     )
     
     flag_instance = FlagInstance(
