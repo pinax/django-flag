@@ -29,6 +29,7 @@ class FlaggedContent(models.Model):
     creator = models.ForeignKey(User, related_name="flagged_content") # user who created flagged content -- this is kept in model so it outlives content
     status = models.CharField(max_length=1, choices=STATUS, default="1")
     moderator = models.ForeignKey(User, null=True, related_name="moderated_content") # moderator responsible for last status change
+    count = models.PositiveIntegerField(default=1)
     
     class Meta:
         unique_together = [("content_type", "object_id")]
@@ -54,6 +55,12 @@ def add_flag(flagger, content_type, object_id, content_creator, comment, status=
         object_id = object_id,
         defaults = defaults
     )
+    if not created:
+        flagged_content.count = models.F("count") + 1
+        flagged_content.save()
+        # pull flagged_content from database to get count attribute filled
+        # properly (not the best way, but works)
+        flagged_content = FlaggedContent.objects.get(pk=flagged_content.pk)
     
     flag_instance = FlagInstance(
         flagged_content = flagged_content,
@@ -62,11 +69,10 @@ def add_flag(flagger, content_type, object_id, content_creator, comment, status=
     )
     flag_instance.save()
     
-    if created:
-        signals.content_flagged.send(
-            sender = FlaggedContent,
-            flagged_content = flagged_content,
-            flagged_instance = flag_instance,
-        )
+    signals.content_flagged.send(
+        sender = FlaggedContent,
+        flagged_content = flagged_content,
+        flagged_instance = flag_instance,
+    )
     
     return flag_instance
