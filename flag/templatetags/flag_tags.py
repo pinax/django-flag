@@ -12,10 +12,11 @@ def flag(context, content_object, creator_field):
         app_label = content_object._meta.app_label,
         model = content_object._meta.module_name
     )
+    request = context["request"]
     return {
         "content_type": content_type.id,
         "object_id": content_object.id,
         "creator_field": creator_field,
-        "request": context["request"],
-        "user": context["user"],
+        "request": request,
+        "user": request.user,
     }
