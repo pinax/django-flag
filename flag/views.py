@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 
@@ -34,4 +35,4 @@ def flag(request):
     if next:
         return HttpResponseRedirect(next)
     else:
-        return Http404
+        return HttpResponseRedirect(reverse('flag-reported'))
