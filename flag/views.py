@@ -1,9 +1,11 @@
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
+from django.contrib import messages
 
 from flag.models import add_flag
 
@@ -28,12 +30,9 @@ def flag(request):
         creator = None
     
     add_flag(request.user, content_type, object_id, creator, comment)
-    request.user.message_set.create(
-        message = _("You have added a flag. A moderator will review your "
-            "submission shortly.")
-    )
+    messages.success(request, _("You have added a flag. A moderator will review your submission shortly."), fail_silently=True)
     
     if next:
         return HttpResponseRedirect(next)
     else:
-        return Http404
+        return HttpResponseRedirect(reverse('flag-reported'))
