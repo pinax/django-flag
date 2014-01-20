@@ -9,6 +9,7 @@ setup(
     author_email = "greg@20seven.org",
     url = "http://code.google.com/p/django-flag/",
     packages = find_packages(),
+    license = "MIT",
     classifiers = [
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
